@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="app_name">PScratchPad</string>
+  <string name="action_settings">Einstellungen</string>
+  <string name="action_about">Über</string>
+  <string name="label_button_load">Neu laden</string>
+  <string name="label_button_save">Speichern</string>
+  <string name="error_rest_SSL">Fehler mit SSL-Verbindung</string>
+  <string name="error_rest_general">Ein Fehler ist aufgetreten:</string>
+  <string name="error_rest_authentication">Fehler bei der Authentifizierung</string>
+  <string name="label_settings_url_title">Host URL</string>
+  <string name="label_settings_name_title">Name</string>
+  <string name="label_settings_ok">OK</string>
+  <string name="label_settings_cancel">Abbrechen</string>
+  <string name="label_settings_username_title">Username</string>
+  <string name="label_settings_password_title">Password</string>
+  <string name="label_settings_passphrase_title">Passphrase</string>
+  <string name="message_url_not_set">Keine Host-URL konfiguriert!</string>
+  <string name="message_name_not_set">Name nicht konfiguriert!</string>
+  <string name="setting_url">url</string>
+  <string name="setting_name">name</string>
+  <string name="setting_username">username</string>
+  <string name="setting_password">password</string>
+  <string name="setting_passphrase">passphrase</string>
+  <string name="message_rest_save_ok">Pad gespeichert!</string>
+  <string name="message_rest_save_not_ok">Fehler beim Speichern des Pads!</string>
+  <string name="label_about">PScratchPad is licensed as Apache 2.0\nhttp://www.apache.org/licenses/\n\nand is hosted on
+    github:\nhttps://github.com/phvogt/PScratchPad-Android\n\nIcon for app is
+    "Hospital Leaflet" by
+    Freepik\nhttp://www.freepik.com/\n and is licensed under CC BY
+    3.0
+  </string>
+
+</resources>

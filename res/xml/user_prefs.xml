@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="@+id/pref_screen" >
+
+    <EditTextPreference
+        android:dialogMessage="@string/label_settings_url_title"
+        android:dialogTitle="@string/label_settings_url_title"
+        android:key="@string/setting_url"
+        android:negativeButtonText="@string/label_settings_cancel"
+        android:positiveButtonText="@string/label_settings_ok"
+        android:title="@string/label_settings_url_title" >
+    </EditTextPreference>
+        <EditTextPreference
+        android:dialogMessage="@string/label_settings_name_title"
+        android:dialogTitle="@string/label_settings_name_title"
+        android:key="@string/setting_name"
+        android:negativeButtonText="@string/label_settings_cancel"
+        android:positiveButtonText="@string/label_settings_ok"
+        android:title="@string/label_settings_name_title" >
+    </EditTextPreference>
+    <EditTextPreference
+        android:dialogMessage="@string/label_settings_username_title"
+        android:dialogTitle="@string/label_settings_username_title"
+        android:key="@string/setting_username"
+        android:negativeButtonText="@string/label_settings_cancel"
+        android:positiveButtonText="@string/label_settings_ok"
+        android:title="@string/label_settings_username_title" />
+    <EditTextPreference
+        android:dialogMessage="@string/label_settings_password_title"
+        android:dialogTitle="@string/label_settings_password_title"
+        android:key="@string/setting_password"
+        android:negativeButtonText="@string/label_settings_cancel"
+        android:positiveButtonText="@string/label_settings_ok"
+        android:title="@string/label_settings_password_title" 
+        android:inputType="textPassword"/>
+    <EditTextPreference
+        android:dialogMessage="@string/label_settings_passphrase_title"
+        android:dialogTitle="@string/label_settings_passphrase_title"
+        android:key="@string/setting_passphrase"
+        android:negativeButtonText="@string/label_settings_cancel"
+        android:positiveButtonText="@string/label_settings_ok"
+        android:title="@string/label_settings_passphrase_title" 
+        android:inputType="textPassword"/>
+
+</PreferenceScreen>
