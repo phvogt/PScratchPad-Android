@@ -1,4 +1,3 @@
-// (c) 2014 by Philipp Vogt
 package com.github.phvogt.pscratchpad.android;
 
 /**
@@ -15,6 +14,8 @@ public interface IConstants {
     String REST_FIELD_STATUS = "status";
     /** REST field for message. */
     String REST_FIELD_MESSAGE = "message";
+    /** REST field for last change. */
+    String REST_FIELD_LASTCHANGE = "lastChange";
 
     /** REST-call for get. */
     String REST_GET = "/rest/";

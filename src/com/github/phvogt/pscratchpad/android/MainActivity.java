@@ -1,5 +1,10 @@
 package com.github.phvogt.pscratchpad.android;
 
+import java.util.Date;
+
+import com.github.phvogt.pscratchpad.android.rest.RestGetTask;
+import com.github.phvogt.pscratchpad.android.rest.RestSaveTask;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,58 +25,64 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+    /** last change of data. */
+    private Date lastChange = new Date();
+
     /**
      * {@inheritDoc}
      */
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
 
-        final String methodname = "onCreate(): ";
+	final String methodname = "onCreate(): ";
 
-        Log.i(IConstants.LOG_TAG, methodname + "start");
+	Log.i(IConstants.LOG_TAG, methodname + "start");
 
-        super.onCreate(savedInstanceState);
+	super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
-        final MainActivity mainActivity = this;
+	setContentView(R.layout.activity_main);
+	final MainActivity mainActivity = this;
 
-        final EditText editor = (EditText) findViewById(R.id.editTextEditor);
-        editor.setTextIsSelectable(true);
+	final EditText editor = (EditText) findViewById(R.id.editTextEditor);
+	editor.setTextIsSelectable(true);
 
-        final Button btnLoad = (Button) findViewById(R.id.btn_load);
-        final Button btnSave = (Button) findViewById(R.id.btn_save);
+	final Button btnLoad = (Button) findViewById(R.id.btn_load);
+	final Button btnSave = (Button) findViewById(R.id.btn_save);
 
-        btnLoad.setOnClickListener(new OnClickListener() {
+	// set load event
+	btnLoad.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(final View v) {
-                btnLoad.setEnabled(false);
-                btnSave.setEnabled(false);
-                final RestGetTask task = new RestGetTask(mainActivity);
-                task.execute();
-            }
-        });
+	    @Override
+	    public void onClick(final View v) {
+		btnLoad.setEnabled(false);
+		btnSave.setEnabled(false);
+		final RestGetTask task = new RestGetTask(mainActivity);
+		task.execute();
+	    }
+	});
 
-        btnSave.setOnClickListener(new OnClickListener() {
+	// set save event
+	btnSave.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(final View v) {
-                btnLoad.setEnabled(false);
-                btnSave.setEnabled(false);
-                final RestSaveTask task = new RestSaveTask(mainActivity);
-                task.execute(editor.getEditableText().toString());
-            }
-        });
+	    @Override
+	    public void onClick(final View v) {
+		btnLoad.setEnabled(false);
+		btnSave.setEnabled(false);
+		final RestSaveTask task = new RestSaveTask(mainActivity);
+		task.execute(editor.getEditableText().toString(), "" + getLastChange().getTime());
+	    }
+	});
 
-        // always show keyboard if editor is clicked
-        editor.setOnClickListener(new OnClickListener() {
+	// always show keyboard if editor is clicked
+	editor.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(final View v) {
-                final InputMethodManager imm = (InputMethodManager) mainActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(editor, InputMethodManager.SHOW_FORCED);
-            }
-        });
+	    @Override
+	    public void onClick(final View v) {
+		final InputMethodManager imm = (InputMethodManager) mainActivity
+			.getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.showSoftInput(editor, InputMethodManager.SHOW_FORCED);
+	    }
+	});
 
     }
 
@@ -81,17 +92,17 @@ public class MainActivity extends Activity {
     @Override
     protected void onPause() {
 
-        // save text editor data in preferences
-        final EditText editor = (EditText) findViewById(R.id.editTextEditor);
+	// save text editor data in preferences
+	final EditText editor = (EditText) findViewById(R.id.editTextEditor);
 
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        final Editor prefsEditor = prefs.edit();
-        prefsEditor.putString(IConstants.PREFS_DATA_KEY, editor.getEditableText().toString());
-        final int selStart = editor.getSelectionStart();
-        prefsEditor.putInt(IConstants.PREFS_CURSOR_POS_KEY, selStart);
-        prefsEditor.commit();
+	final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+	final Editor prefsEditor = prefs.edit();
+	prefsEditor.putString(IConstants.PREFS_DATA_KEY, editor.getEditableText().toString());
+	final int selStart = editor.getSelectionStart();
+	prefsEditor.putInt(IConstants.PREFS_CURSOR_POS_KEY, selStart);
+	prefsEditor.commit();
 
-        super.onPause();
+	super.onPause();
     }
 
     /**
@@ -100,39 +111,39 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
 
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        final String storedData = prefs.getString(IConstants.PREFS_DATA_KEY, null);
-        if (storedData == null) {
-            // no stored data so use REST-call
-            final Button btnLoad = (Button) findViewById(R.id.btn_load);
-            final Button btnSave = (Button) findViewById(R.id.btn_save);
-            final MainActivity mainActivity = this;
+	final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+	final String storedData = prefs.getString(IConstants.PREFS_DATA_KEY, null);
+	if (storedData == null) {
+	    // no stored data so use REST-call
+	    final Button btnLoad = (Button) findViewById(R.id.btn_load);
+	    final Button btnSave = (Button) findViewById(R.id.btn_save);
+	    final MainActivity mainActivity = this;
 
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    // pre load data
-                    btnLoad.setEnabled(false);
-                    btnSave.setEnabled(false);
+	    final Handler handler = new Handler();
+	    handler.postDelayed(new Runnable() {
+		@Override
+		public void run() {
+		    // pre load data
+		    btnLoad.setEnabled(false);
+		    btnSave.setEnabled(false);
 
-                    final RestGetTask task = new RestGetTask(mainActivity);
-                    task.execute();
-                }
-            }, 1000);
-        } else {
-            // data stored, so load it
-            final EditText editor = (EditText) findViewById(R.id.editTextEditor);
-            editor.setText(storedData);
+		    final RestGetTask task = new RestGetTask(mainActivity);
+		    task.execute();
+		}
+	    }, 1000);
+	} else {
+	    // data stored, so load it
+	    final EditText editor = (EditText) findViewById(R.id.editTextEditor);
+	    editor.setText(storedData);
 
-            editor.setTextIsSelectable(true);
-            editor.setEnabled(true);
+	    editor.setTextIsSelectable(true);
+	    editor.setEnabled(true);
 
-            final int cursorPos = prefs.getInt(IConstants.PREFS_CURSOR_POS_KEY, 0);
-            editor.setSelection(cursorPos);
-        }
+	    final int cursorPos = prefs.getInt(IConstants.PREFS_CURSOR_POS_KEY, 0);
+	    editor.setSelection(cursorPos);
+	}
 
-        super.onResume();
+	super.onResume();
     }
 
     /**
@@ -141,13 +152,13 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
 
-        final String methodname = "onCreateOptionsMenu(): ";
+	final String methodname = "onCreateOptionsMenu(): ";
 
-        Log.i(IConstants.LOG_TAG, methodname + "start");
+	Log.i(IConstants.LOG_TAG, methodname + "start");
 
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+	// Inflate the menu; this adds items to the action bar if it is present.
+	getMenuInflater().inflate(R.menu.main, menu);
+	return true;
     }
 
     /**
@@ -155,26 +166,47 @@ public class MainActivity extends Activity {
      */
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.action_settings:
-            final Intent intent = new Intent(this, SettingsActivity.class);
-            startActivityForResult(intent, 0);
-            return true;
-        case R.id.action_about:
-            final Intent intentAbout = new Intent(this, AboutActivity.class);
-            startActivity(intentAbout);
-            return true;
-        default:
-            return false;
-        }
+	switch (item.getItemId()) {
+	case R.id.action_settings:
+	    final Intent intent = new Intent(this, SettingsActivity.class);
+	    startActivityForResult(intent, 0);
+	    return true;
+	case R.id.action_about:
+	    final Intent intentAbout = new Intent(this, AboutActivity.class);
+	    startActivity(intentAbout);
+	    return true;
+	default:
+	    return false;
+	}
     }
 
     /**
      * Shows a message.
-     * @param msg message to show.
+     * 
+     * @param msg
+     *            message to show.
      */
     public void showMessage(final String msg) {
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+	Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * Get the lastChange.
+     * 
+     * @return the lastChange
+     */
+    public Date getLastChange() {
+	return lastChange;
+    }
+
+    /**
+     * Sets the lastChange.
+     * 
+     * @param lastChange
+     *            the lastChange to set
+     */
+    public void setLastChange(final Date lastChange) {
+	this.lastChange = lastChange;
     }
 
 }

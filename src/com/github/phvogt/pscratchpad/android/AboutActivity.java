@@ -1,4 +1,3 @@
-// (c) 2014 by Philipp Vogt
 package com.github.phvogt.pscratchpad.android;
 
 import android.app.Activity;
@@ -16,13 +15,13 @@ public class AboutActivity extends Activity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
 
-        final String methodname = "onCreate(): ";
+	final String methodname = "onCreate(): ";
 
-        Log.i(IConstants.LOG_TAG, methodname + "start");
+	Log.i(IConstants.LOG_TAG, methodname + "start");
 
-        super.onCreate(savedInstanceState);
+	super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_about);
+	setContentView(R.layout.activity_about);
 
     }
 

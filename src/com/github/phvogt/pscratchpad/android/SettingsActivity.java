@@ -1,4 +1,3 @@
-// (c) 2014 by Philipp Vogt
 package com.github.phvogt.pscratchpad.android;
 
 import android.app.Activity;
@@ -15,9 +14,9 @@ public class SettingsActivity extends Activity {
      */
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	super.onCreate(savedInstanceState);
 
-        getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+	getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
     }
 
     /**
@@ -25,15 +24,15 @@ public class SettingsActivity extends Activity {
      */
     public static class SettingsFragment extends PreferenceFragment {
 
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void onCreate(final Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void onCreate(final Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
 
-            // Load the preferences from an XML resource
-            addPreferencesFromResource(R.xml.user_prefs);
-        }
+	    // Load the preferences from an XML resource
+	    addPreferencesFromResource(R.xml.user_prefs);
+	}
     }
 }
