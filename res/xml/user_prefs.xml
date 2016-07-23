@@ -2,44 +2,55 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="@+id/pref_screen" >
 
-    <EditTextPreference
-        android:dialogMessage="@string/label_settings_url_title"
-        android:dialogTitle="@string/label_settings_url_title"
-        android:key="@string/setting_url"
-        android:negativeButtonText="@string/label_settings_cancel"
-        android:positiveButtonText="@string/label_settings_ok"
-        android:title="@string/label_settings_url_title" >
-    </EditTextPreference>
+    <PreferenceCategory android:title="@string/label_settings_connection" >
         <EditTextPreference
-        android:dialogMessage="@string/label_settings_name_title"
-        android:dialogTitle="@string/label_settings_name_title"
-        android:key="@string/setting_name"
-        android:negativeButtonText="@string/label_settings_cancel"
-        android:positiveButtonText="@string/label_settings_ok"
-        android:title="@string/label_settings_name_title" >
-    </EditTextPreference>
-    <EditTextPreference
-        android:dialogMessage="@string/label_settings_username_title"
-        android:dialogTitle="@string/label_settings_username_title"
-        android:key="@string/setting_username"
-        android:negativeButtonText="@string/label_settings_cancel"
-        android:positiveButtonText="@string/label_settings_ok"
-        android:title="@string/label_settings_username_title" />
-    <EditTextPreference
-        android:dialogMessage="@string/label_settings_password_title"
-        android:dialogTitle="@string/label_settings_password_title"
-        android:key="@string/setting_password"
-        android:negativeButtonText="@string/label_settings_cancel"
-        android:positiveButtonText="@string/label_settings_ok"
-        android:title="@string/label_settings_password_title" 
-        android:inputType="textPassword"/>
-    <EditTextPreference
-        android:dialogMessage="@string/label_settings_passphrase_title"
-        android:dialogTitle="@string/label_settings_passphrase_title"
-        android:key="@string/setting_passphrase"
-        android:negativeButtonText="@string/label_settings_cancel"
-        android:positiveButtonText="@string/label_settings_ok"
-        android:title="@string/label_settings_passphrase_title" 
-        android:inputType="textPassword"/>
+            android:dialogMessage="@string/label_settings_url_title"
+            android:dialogTitle="@string/label_settings_url_title"
+            android:key="@string/setting_url"
+            android:negativeButtonText="@string/label_settings_cancel"
+            android:positiveButtonText="@string/label_settings_ok"
+            android:summary=""
+            android:title="@string/label_settings_url_title" >
+        </EditTextPreference>
+        <EditTextPreference
+            android:dialogMessage="@string/label_settings_name_title"
+            android:dialogTitle="@string/label_settings_name_title"
+            android:key="@string/setting_name"
+            android:negativeButtonText="@string/label_settings_cancel"
+            android:positiveButtonText="@string/label_settings_ok"
+            android:summary=""
+            android:title="@string/label_settings_name_title" >
+        </EditTextPreference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/label_settings_encryption" >
+        <EditTextPreference
+            android:dialogMessage="@string/label_settings_passphrase_title"
+            android:dialogTitle="@string/label_settings_passphrase_title"
+            android:inputType="textPassword"
+            android:key="@string/setting_passphrase"
+            android:negativeButtonText="@string/label_settings_cancel"
+            android:positiveButtonText="@string/label_settings_ok"
+            android:summary=""
+            android:title="@string/label_settings_passphrase_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/label_settings_authentication" >
+        <EditTextPreference
+            android:dialogMessage="@string/label_settings_username_title"
+            android:dialogTitle="@string/label_settings_username_title"
+            android:key="@string/setting_username"
+            android:negativeButtonText="@string/label_settings_cancel"
+            android:positiveButtonText="@string/label_settings_ok"
+            android:summary=""
+            android:title="@string/label_settings_username_title" />
+        <EditTextPreference
+            android:dialogMessage="@string/label_settings_password_title"
+            android:dialogTitle="@string/label_settings_password_title"
+            android:inputType="textPassword"
+            android:key="@string/setting_password"
+            android:negativeButtonText="@string/label_settings_cancel"
+            android:positiveButtonText="@string/label_settings_ok"
+            android:summary=""
+            android:title="@string/label_settings_password_title" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

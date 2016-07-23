@@ -12,42 +12,53 @@
         android:id="@+id/svEditor"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/btn_load"
-        android:layout_marginTop="20dp" >
+        android:layout_below="@+id/btn_load"
+        android:layout_marginTop="2dp" >
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-
-            <EditText
-                android:id="@+id/editTextEditor"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@drawable/backwithborders"
-                android:gravity="top|left"
-                android:inputType="textMultiLine"
-                android:textIsSelectable="true" >
-
-                <requestFocus />
+    <EditText
+        android:id="@+id/editTextEditor"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/backwithborders"
+        android:ems="10"
+        android:gravity="top|left"
+        android:inputType="textMultiLine"
+        android:textIsSelectable="true">
+                        <requestFocus />
             </EditText>
         </LinearLayout>
     </ScrollView>
 
     <Button
         android:id="@+id/btn_load"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
         android:text="@string/label_button_load" />
 
     <Button
         android:id="@+id/btn_save"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBaseline="@+id/btn_load"
+        android:layout_alignBottom="@+id/btn_load"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="1dp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
         android:text="@string/label_button_save" />
+
 
 </RelativeLayout>
